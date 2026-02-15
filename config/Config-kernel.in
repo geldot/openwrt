@@ -26,7 +26,7 @@ config KERNEL_PRINTK
 
 config KERNEL_SWAP
 	bool "Support for paging of anonymous memory (swap)"
-	default y if !SMALL_FLASH
+	default y
 
 config KERNEL_PROC_STRIPPED
 	bool "Strip non-essential /proc functionality to reduce code size"
