@@ -200,7 +200,7 @@ define KernelPackage/nf-flow
 	CONFIG_NF_FLOW_TABLE
   DEPENDS:=+kmod-nf-conntrack +kmod-nft-core
   FILES:= $(LINUX_DIR)/net/netfilter/nf_flow_table.ko
-  AUTOLOAD:=$(call AutoProbe,nf_flow_table nf_flow_table_hw)
+  AUTOLOAD:=$(call AutoProbe,nf_flow_table)
 endef
 
 $(eval $(call KernelPackage,nf-flow))
@@ -1395,7 +1395,7 @@ define KernelPackage/nft-netdev
 	$(LINUX_DIR)/net/netfilter/nf_dup_netdev.ko \
 	$(LINUX_DIR)/net/netfilter/nft_dup_netdev.ko \
 	$(LINUX_DIR)/net/netfilter/nft_fwd_netdev.ko
-  AUTOLOAD:=$(call AutoProbe,nf_tables_netdev nf_dup_netdev nft_dup_netdev nft_fwd_netdev)
+  AUTOLOAD:=$(call AutoProbe,nf_dup_netdev nft_dup_netdev nft_fwd_netdev)
 endef
 
 $(eval $(call KernelPackage,nft-netdev))
