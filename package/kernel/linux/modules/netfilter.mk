@@ -895,7 +895,7 @@ define KernelPackage/ipt-tee
   DEPENDS:=+kmod-ipt-conntrack +kmod-nf-dup-inet
   KCONFIG:=$(KCONFIG_IPT_TEE)
   FILES:=$(foreach mod,$(IPT_TEE-m),$(LINUX_DIR)/net/$(mod).ko)
-  AUTOLOAD:=$(call AutoProbe,$(notdir nf_tee $(IPT_TEE-m)))
+  AUTOLOAD:=$(call AutoProbe,$(notdir $(IPT_TEE-m)))
   $(call AddDepends/ipt)
 endef
 
@@ -910,7 +910,7 @@ define KernelPackage/ipt-u32
   TITLE:=U32 support
   KCONFIG:=$(KCONFIG_IPT_U32)
   FILES:=$(foreach mod,$(IPT_U32-m),$(LINUX_DIR)/net/$(mod).ko)
-  AUTOLOAD:=$(call AutoProbe,$(notdir nf_tee $(IPT_U32-m)))
+  AUTOLOAD:=$(call AutoProbe,$(notdir $(IPT_U32-m)))
   $(call AddDepends/ipt)
 endef
 
@@ -1281,7 +1281,7 @@ define KernelPackage/ipt-rpfilter
   FILES:=$(realpath \
 	$(LINUX_DIR)/net/ipv4/netfilter/ipt_rpfilter.ko \
 	$(LINUX_DIR)/net/ipv6/netfilter/ip6t_rpfilter.ko)
-  AUTOLOAD:=$(call AutoProbe,ipt_rpfilter ip6t_rpfilter)
+  AUTOLOAD:=$(call AutoProbe,$(notdir $(FILES:.ko=)))
   $(call KernelPackage/ipt)
 endef
 

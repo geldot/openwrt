@@ -113,7 +113,7 @@ define KernelPackage/fsl-dpaa1-net
     CONFIG_FSL_DPAA_CHECKING=n \
     CONFIG_FSL_BMAN_TEST=n \
     CONFIG_FSL_QMAN_TEST=n
-  MODULES:= \
+  FILES:= \
     $(LINUX_DIR)/drivers/net/ethernet/freescale/dpaa/fsl_dpa.ko \
     $(LINUX_DIR)/drivers/net/ethernet/freescale/fman/fsl_dpaa_fman.ko \
     $(LINUX_DIR)/drivers/net/ethernet/freescale/fman/fsl_dpaa_mac.ko

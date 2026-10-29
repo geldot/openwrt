@@ -37,7 +37,7 @@ define KernelPackage/dma-buf
       FILES:=$(LINUX_DIR)/drivers/dma-buf/dma-shared-buffer.ko
     endif
   endif
-  AUTOLOAD:=$(call AutoLoad,20,dma-shared-buffer)
+  AUTOLOAD:=$(call AutoLoad,20,$(notdir $(FILES:.ko=)))
 endef
 $(eval $(call KernelPackage,dma-buf))
 
@@ -591,7 +591,7 @@ define KernelPackage/serial-8250
 	$(LINUX_DIR)/drivers/tty/serial/8250/8250_base.ko \
 	$(if $(CONFIG_PCI),$(LINUX_DIR)/drivers/tty/serial/8250/8250_pci.ko) \
 	$(if $(CONFIG_GPIOLIB),$(LINUX_DIR)/drivers/tty/serial/serial_mctrl_gpio.ko)
-  AUTOLOAD:=$(call AutoProbe,8250 8250_base 8250_pci)
+  AUTOLOAD:=$(call AutoProbe,8250 8250_base $(if $(CONFIG_PCI),8250_pci))
 endef
 
 define KernelPackage/serial-8250/description
@@ -631,7 +631,7 @@ define KernelPackage/serial-8250-exar
   TITLE:=Exar 8250 UARTs
   KCONFIG:= CONFIG_SERIAL_8250_EXAR
   FILES:=$(LINUX_DIR)/drivers/tty/serial/8250/8250_exar.ko
-  AUTOLOAD:=$(call AutoProbe,8250 8250_base 8250_exar)
+  AUTOLOAD:=$(call AutoProbe,8250_exar)
   DEPENDS:=@PCI_SUPPORT +kmod-serial-8250 +kmod-eeprom-93cx6
 endef
 

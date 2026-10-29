@@ -315,7 +315,7 @@ define KernelPackage/usb-ohci
   ifneq ($(wildcard $(LINUX_DIR)/drivers/usb/host/ohci-at91.ko),)
     FILES+=$(LINUX_DIR)/drivers/usb/host/ohci-at91.ko
   endif
-  AUTOLOAD:=$(call AutoLoad,50,ohci-hcd ohci-platform ohci-at91,1)
+  AUTOLOAD:=$(call AutoLoad,50,$(notdir $(FILES:.ko=)),1)
   $(call AddDepends/usb)
 endef
 
@@ -409,7 +409,7 @@ define KernelPackage/usb2
   ifneq ($(wildcard $(LINUX_DIR)/drivers/usb/host/fsl-mph-dr-of.ko),)
     FILES+=$(LINUX_DIR)/drivers/usb/host/fsl-mph-dr-of.ko
   endif
-  AUTOLOAD:=$(call AutoLoad,40,ehci-hcd ehci-platform ehci-orion ehci-atmel ehci-fsl fsl-mph-dr-of,1)
+  AUTOLOAD:=$(call AutoLoad,40,$(notdir $(FILES:.ko=)),1)
   $(call AddDepends/usb)
 endef
 
@@ -1001,7 +1001,7 @@ define KernelPackage/usb-serial-keyspan
   FILES:= \
 	$(LINUX_DIR)/drivers/usb/serial/keyspan.ko \
 	$(wildcard $(LINUX_DIR)/drivers/usb/misc/ezusb.ko)
-  AUTOLOAD:=$(call AutoProbe,ezusb keyspan)
+  AUTOLOAD:=$(call AutoProbe,$(notdir $(FILES:.ko=)))
   $(call AddDepends/usb-serial)
 endef
 
